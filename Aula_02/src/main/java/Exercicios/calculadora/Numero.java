@@ -1,4 +1,4 @@
-package calculadora;
+package Exercicios.calculadora;
 
 public class Numero {
     private int valor;

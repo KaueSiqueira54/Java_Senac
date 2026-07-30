@@ -1,4 +1,4 @@
-package calculadora;
+package Exercicios.calculadora;
 import java.util.Scanner;
 
 public class Calculadora {

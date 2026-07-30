@@ -89,5 +89,4 @@ public abstract class Animal implements SerVivo {
         System.out.println("Força: %d".formatted(this.forca));
         System.out.println("------------------------");
     }
-
 }
