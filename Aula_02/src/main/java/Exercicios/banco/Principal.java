@@ -1,13 +1,15 @@
 package Exercicios.banco;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static Exercicios.banco.Conta.*;
 
 public class Principal {
     public static void main(String[] args) {
+        inicioPrograma();
+    }
 
+    public static void inicioPrograma() {
         Scanner leitura = new Scanner(System.in);
         int opcao;
 

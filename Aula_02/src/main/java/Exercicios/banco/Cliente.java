@@ -1,7 +1,5 @@
 package Exercicios.banco;
 
-import com.sun.jdi.DoubleValue;
-
 public class Cliente {
     private String nome;
     private Double saldo;
