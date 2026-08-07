@@ -15,6 +15,10 @@ public class Cliente {
         return nome;
     }
 
+    protected void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getCpf() {
         return cpf;
     }

@@ -20,6 +20,7 @@ public class Conta extends Cliente {
         this.senhaConta = senhaConta;
     }
 
+    @Override
     public void info() {
         super.info();
         System.out.printf("""
@@ -78,13 +79,7 @@ public class Conta extends Cliente {
         Scanner leitura = new Scanner(System.in);
         int conta = 0;
 
-        for (int i = 0; i < contas.size(); i++) {
-            System.out.println("----------------");
-            System.out.println("Conta %d".formatted(i));
-            System.out.println("Titular: %s".formatted(contas.get(i).getNome()));
-            System.out.println("Tipo da conta: %s".formatted(contas.get(i).tipoConta));
-            System.out.println("----------------");
-        }
+        mostrarContas();
 
         System.out.println("Digite a conta que deseja excluir: (EX: 1)");
         conta = leitura.nextInt();
@@ -100,14 +95,63 @@ public class Conta extends Cliente {
         }
     }
 
+    public static void atualizarDados() {
+        Scanner leitura = new Scanner(System.in);
+        int conta = 0;
+        int dadoAtualizar = 0;
+        String nomeAtualizar, cepAtualizar;
+        int senhaContaAtualizar;
+
+        mostrarContas();
+
+        System.out.println("Digite a conta que deseja atualizar: (EX: 1)");
+        conta = leitura.nextInt();
+        leitura.nextLine();
+
+        System.out.println("Qual dado desta conta deseja atualizar?");
+        System.out.println("""
+                1 - Nome
+                2 - CEP
+                3 - Senha
+                """);
+        dadoAtualizar = leitura.nextInt();
+        leitura.nextLine();
+
+        if(dadoAtualizar == 1) {
+            System.out.println("Digite o novo nome: ");
+            nomeAtualizar = leitura.nextLine();
+
+            contas.get(conta).setNome(nomeAtualizar);
+            System.out.println("Nome atualizado com sucesso!");
+        } else if(dadoAtualizar == 2) {
+            System.out.println("Digite o novo CEP: ");
+            cepAtualizar = leitura.nextLine();
+
+            contas.get(conta).setCep(cepAtualizar);
+            System.out.println("CEP atualizado com sucesso!");
+        } else if(dadoAtualizar == 3) {
+            System.out.println("Digite a nova senha (EX: 0000): ");
+            senhaContaAtualizar = leitura.nextInt();
+            leitura.nextLine();
+
+            contas.get(conta).setSenhaConta(senhaContaAtualizar);
+            System.out.println("Senha atualizada com sucesso!");
+        } else {
+            System.out.println("Opção inválida! Tente novamente");
+        }
+    }
+
     public static void acessarConta() {
         Scanner leitura = new Scanner(System.in);
         int conta = 0;
         int senhaConta;
 
         for (int i = 0; i < contas.size(); i++) {
+            System.out.println("----------------");
             System.out.println("Conta %d".formatted(i));
-            listarContas();
+            System.out.println("Titular: %s".formatted(contas.get(i).getNome()));
+            System.out.println("Tipo da conta: %s".formatted(contas.get(i).tipoConta));
+            System.out.println("----------------");
         }
 
         System.out.println("Qual conta deseja acessar? (EX: 1)");
@@ -124,17 +168,17 @@ public class Conta extends Cliente {
 
                 int opcao = 0;
 
-                while (opcao != 4) {
+                while (opcao != 5) {
                 System.out.println("""
                 1 - Informações da conta
                 2 - Depósito
                 3 - Saque
-                4 - Sair
+                4 - Atualizar dados
+                5 - Sair
                 """);
 
                 opcao = leitura.nextInt();
                 leitura.nextLine();
-
 
                     switch (opcao) {
                         case 1:
@@ -167,6 +211,9 @@ public class Conta extends Cliente {
                                 System.out.println("Algo deu errado, tente novamente! " + erro);
                             }
                             break;
+                        case 4:
+                            atualizarDados();
+                            break;
                     }
                 }
             } else {
@@ -176,5 +223,24 @@ public class Conta extends Cliente {
             System.out.println("A conta digitada para acesso não existe. Tente novamente!" + erro.toString());
         }
     }
-}
 
+    public static void mostrarContas() {
+        for (int i = 0; i < contas.size(); i++) {
+            System.out.println("----------------");
+            System.out.println("Conta %d".formatted(i));
+            System.out.println("----------------");
+            System.out.println("Titular: %s".formatted(contas.get(i).getNome()));
+            System.out.println("Tipo da conta: %s".formatted(contas.get(i).tipoConta));
+            System.out.println("----------------");
+        }
+    }
+
+    //sets
+
+    private void setCep(String cep) {
+        this.cep = cep;
+    }
+    private void setSenhaConta(int senhaConta) {
+        this.senhaConta = senhaConta;
+    }
+}
